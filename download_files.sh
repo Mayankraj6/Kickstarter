@@ -1,10 +1,14 @@
 #!/bin/bash
-echo "Downloading files from Google Drive..."
+echo "Downloading file from Google Drive..."
 
-# Google Drive folder link
-GDRIVE_LINK="https://drive.google.com/drive/folders/1CKMO5INyndp5l0PrZh64YiJ9aU6h_RPN?usp=sharing"
+# Install gdown if not installed
+pip install gdown
 
-echo "Please visit the following link to manually download the files:"
-echo "$GDRIVE_LINK"
+# Replace FILE_ID with the actual File ID from your Google Drive link
+FILE_ID="1ABCDEF123456789"  # Replace with your actual file ID
+FILE_NAME="my_large_file.zip"  # Replace with your desired file name
 
-echo "Download complete!"
+# Download the file
+gdown "https://drive.google.com/uc?export=download&id=$FILE_ID" -O $FILE_NAME
+
+echo "Download complete: $FILE_NAME"
