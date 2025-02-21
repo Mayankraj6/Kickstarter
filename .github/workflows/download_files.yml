@@ -1,0 +1,27 @@
+name: Download Google Drive File
+
+on: [push]
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install gdown
+        run: pip install gdown
+
+      - name: Download File from Google Drive
+        run: |
+          FILE_ID="https://drive.google.com/drive/folders/1CKMO5INyndp5l0PrZh64YiJ9aU6h_RPN?usp=sharing"  # Replace with actual File ID
+          FILE_NAME="my_large_file.zip"
+          gdown "https://drive.google.com/uc?export=download&id=$FILE_ID" -O $FILE_NAME
+
+      - name: Commit Downloaded File
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add $FILE_NAME
+          git commit -m "Added downloaded file from Google Drive"
+          git push
